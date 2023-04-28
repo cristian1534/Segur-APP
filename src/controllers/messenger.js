@@ -9,7 +9,7 @@ exports.send_message = (array, address, info) => {
     .create({
       body: `Alerta: ${address} ${info}`,
       from: "+16206340387",
-      to: array,
+      to: `${array}`,
     })
     .then((message) => console.log(message.sid));
 };
