@@ -1,22 +1,14 @@
 const firebase = require("../database/firebase");
 const { create_data_user } = require("../controllers/message_controllers");
-const { updateProfile, getAuth } = require("firebase/auth")
 require("firebase/auth");
 
 exports.register = async (req, res) => {
- 
   const { name, telephone, email, password } = req.body;
-  const au = getAuth();
   try {
     await firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((data) => {
-      updateProfile(
-        au.currentUser, {
-          displayName: name
-        }
-      )
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((data) => {
         create_data_user(name, telephone);
         return res.status(200).json(data);
       });
